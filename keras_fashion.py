@@ -8,7 +8,13 @@ import pandas as pd
 from keras.models import Sequential
 from keras.layers import Activation, Conv2D, MaxPooling2D, Dense, Flatten, BatchNormalization, Dropout
 
-
+# a function to one hot encode the labels
+def y2indicator(Y):
+  N = len(Y)
+  K = len(set(Y))
+  I = np.zeros((N, K))
+  I[np.arange(N), Y] = 1
+  return I
 
 # obtain the data from kaggle repository
 fashion_data = pd.read_csv('../large_files/fashionmnist/fashion-mnist_train.csv')
@@ -83,10 +89,4 @@ plt.show()
 
 
 
-# a function to one hot encode the labels
-def y2indicator(Y):
-  N = len(Y)
-  K = len(set(Y))
-  I = np.zeros((N, K))
-  I[np.arange(N), Y] = 1
-  return I
+
